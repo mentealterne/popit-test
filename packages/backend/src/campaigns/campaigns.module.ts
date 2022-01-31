@@ -9,5 +9,6 @@ import { CampaignsService } from './campaigns.service';
   imports: [TypeOrmModule.forFeature([Campaign, Story])],
   controllers: [CampaignsController],
   providers: [CampaignsService],
+  exports: [TypeOrmModule],
 })
 export class CampaignsModule {}

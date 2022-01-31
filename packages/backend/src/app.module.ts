@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { StoriesModule } from './stories/stories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SeedsModule } from './seeds/seeds.module';
 import TypeOrmConfigService from './config/typeorm.config';
 
 @Module({
@@ -19,6 +20,7 @@ import TypeOrmConfigService from './config/typeorm.config';
 
     CampaignsModule,
     StoriesModule,
+    SeedsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

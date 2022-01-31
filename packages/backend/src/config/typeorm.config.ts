@@ -7,7 +7,7 @@ export default class TypeOrmConfigService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       host: process.env.DB_HOST,
-      type: 'postgres',
+      type: process.env.DB_CONNECTION as 'postgres' | 'mysql',
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,

@@ -9,5 +9,6 @@ import Story from './story.entity';
   imports: [TypeOrmModule.forFeature([Story, Campaign])],
   controllers: [StoriesController],
   providers: [StoriesService],
+  exports: [TypeOrmModule],
 })
 export class StoriesModule {}
