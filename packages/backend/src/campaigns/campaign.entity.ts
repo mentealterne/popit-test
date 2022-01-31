@@ -1,4 +1,4 @@
-import Story from 'src/stories/story.entity';
+import Story from '../stories/story.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

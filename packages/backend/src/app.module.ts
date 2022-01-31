@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { StoriesModule } from './stories/stories.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import TypeOrmConfigService from './config/typeorm.config';
 
 @Module({
   imports: [
@@ -12,9 +13,12 @@ import { StoriesModule } from './stories/stories.module';
       envFilePath: `.env`,
       isGlobal: true,
     }),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
+
     CampaignsModule,
     StoriesModule,
-    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
