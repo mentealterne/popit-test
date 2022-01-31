@@ -1,7 +1,13 @@
 import Campaign from 'src/campaigns/campaign.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity({ name: 'stories' })
 class Story {
   @PrimaryGeneratedColumn()
   public id: number;
@@ -18,10 +24,11 @@ class Story {
   @Column({ type: 'bigint' })
   public clicks: number;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', name: 'postedat' })
   public postedAt: Date;
 
   @ManyToOne(() => Campaign, (campaign) => campaign.stories)
+  @JoinColumn({ name: 'campaignid' })
   campaign: Campaign;
 }
 

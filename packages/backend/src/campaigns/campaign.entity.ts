@@ -1,7 +1,7 @@
 import Story from '../stories/story.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'campaigns' })
 class Campaign {
   @PrimaryGeneratedColumn()
   public id: number;
@@ -12,10 +12,10 @@ class Campaign {
   @Column({ type: 'boolean', default: false })
   public open: boolean;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', name: 'createdat' })
   public createdAt: Date;
 
-  @OneToMany(() => Story, (story) => story.campaign)
+  @OneToMany(() => Story, (story) => story.campaign, { eager: true })
   stories: Story[];
 }
 
