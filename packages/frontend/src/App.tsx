@@ -1,6 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          className=" font-bold text-gray-500"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
