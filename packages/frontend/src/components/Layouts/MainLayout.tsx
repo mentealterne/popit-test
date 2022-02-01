@@ -30,8 +30,10 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
             </button>
           </div>
         </div>
-        <div className="w-4/6 bg-gray-200">{children} </div>
-        <div className="w-1/6"> </div>
+        <div className="w-4/6 bg-gray-200 overflow-y-auto">{children} </div>
+        <div className="w-1/6  flex flex-col p-4 justify-between">
+          <p className="font-bold">Logout</p>
+        </div>
       </div>
     </div>
   );

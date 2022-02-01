@@ -1,11 +1,11 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
 
 interface IProps {
   name: string;
   data?: any;
   filterOptions?: { label: string; value: string }[];
-  onFilterChange: (value: number) => void;
+  onFilterChange?: (value: number) => void;
   columns: { label: string; key: string }[];
   pageLength?: number;
 }
@@ -15,12 +15,22 @@ const FilteredTable: FunctionComponent<IProps> = ({
   data,
   columns,
   filterOptions,
+  pageLength = 10,
   onFilterChange,
 }) => {
+  const [page, setPage] = useState(1);
+  const pages = data.length / pageLength;
+
+  const [paginatedData, setPaginatedData] = useState([]);
+
+  useEffect(() => {
+    setPaginatedData(data.slice(pageLength * (page - 1), pageLength * page));
+  }, [page, data]);
+
   return (
     <div className="flex flex-col gap-4 w-full bg-white rounded shadow-md p-4 font-light text-gray-700">
       <h1 className="font-bold">{name}</h1>
-      {filterOptions && (
+      {filterOptions && onFilterChange && (
         <Dropdown
           options={filterOptions}
           onChange={(key) => onFilterChange(key.value)}
@@ -39,7 +49,7 @@ const FilteredTable: FunctionComponent<IProps> = ({
         </thead>
 
         <tbody>
-          {data.map((row: any) => {
+          {paginatedData.map((row: any) => {
             return (
               <tr className="py-2">
                 {columns.map((column, index) => (
@@ -53,6 +63,19 @@ const FilteredTable: FunctionComponent<IProps> = ({
           })}
         </tbody>
       </table>
+
+      {data.length > pageLength && (
+        <ul className="flex flex-row gap-1 w-full justify-center">
+          {Array.from({ length: pages }).map((_, index) => (
+            <li
+              className="rounded-md shadow-md w-12 bg-orange-300 text-center text-white font-bold p-1 cursor-pointer hover:bg-orange-500"
+              onClick={() => setPage(index + 1)}
+            >
+              {index + 1}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

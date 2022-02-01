@@ -39,6 +39,11 @@ export class CampaignsController {
     return await this.campaignsService.getKInfluencers(type, k, campaignId);
   }
 
+  @Get('average-views')
+  async getAverageViews() {
+    return await this.campaignsService.getAverageViews();
+  }
+
   @Get(':campaignId')
   async getCampaignDetails(
     @Param('campaignId', ParseIntPipe) campaignId: number,
@@ -57,12 +62,5 @@ export class CampaignsController {
   @Delete('campaignId')
   async deleteCampaign(@Param('campaignId', ParseIntPipe) campaignId: number) {
     return await this.campaignsService.remove(campaignId);
-  }
-
-  @Get(':campaignId/average-views')
-  async getAverageViewsPerCampaign(
-    @Param('campaignId', ParseIntPipe) campaignId: number,
-  ) {
-    return await this.campaignsService.getAverageViewsPerCampaign(campaignId);
   }
 }

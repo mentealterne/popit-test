@@ -32,8 +32,8 @@ export class CampaignsService {
     await this.campaignsRepository.delete(campaignId);
   }
 
-  async getAverageViewsPerCampaign(campaignId: number) {
-    const sql = `SELECT AVG(views) AS average_views FROM stories WHERE campaignid = ${campaignId}`;
+  async getAverageViews() {
+    const sql = `SELECT c.company, AVG(s.views) AS average_views FROM stories s LEFT JOIN campaigns c on c.id = s.campaignid GROUP BY c.company ORDER BY average_views DESC`;
     return await this.campaignsRepository.query(sql);
   }
 
