@@ -10,7 +10,7 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
   return (
     <div className="w-screen h-screen bg-gray-100 p-4 justify-center  flex">
       <div className="flex flex-row gap-4 bg-white rounded-md shadow-md w-full">
-        <div className="w-1/5 flex flex-col p-4 justify-between">
+        <div className="w-1/6 flex flex-col p-4 justify-between">
           <h1 className="text-orange-600 text-2xl font-bold uppercase">
             PopIt
           </h1>
@@ -30,8 +30,8 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
             </button>
           </div>
         </div>
-        <div className="w-3/5 bg-gray-200">{children} </div>
-        <div className="w-1/5"> </div>
+        <div className="w-4/6 bg-gray-200">{children} </div>
+        <div className="w-1/6"> </div>
       </div>
     </div>
   );

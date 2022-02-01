@@ -20,6 +20,11 @@ import Campaign from './campaign.entity';
 export class CampaignsController {
   constructor(private readonly campaignsService: CampaignsService) {}
 
+  @Get('/')
+  async getCampaigns(): Promise<Campaign[]> {
+    return await this.campaignsService.getAll();
+  }
+
   @Post('/')
   async createCampaign(@Body() campaign: CampaignDTO): Promise<void> {
     return await this.campaignsService.create(campaign);
