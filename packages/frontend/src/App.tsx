@@ -5,44 +5,21 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
+import MainLayout from "./components/Layouts/MainLayout";
+import routes from "./routes/routes-list";
 
-function Index() {
-  return <h2>Home</h2>;
-}
-
-type TParams = { id: number };
-
-function Product(): JSX.Element {
-  const params = useParams();
-
-  return <h2>This is a page for product with ID: {params.id}</h2>;
-}
-
-function AppRouter() {
+function App() {
   return (
     <BrowserRouter>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/products/1">First Product</Link>
-            </li>
-            <li>
-              <Link to="/products/2">Second Product</Link>
-            </li>
-          </ul>
-        </nav>
-
+      <MainLayout>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/products/:id" element={<Product />} />
+          {routes.map((route) => (
+            <Route path={route.href} element={route.component} />
+          ))}
         </Routes>
-      </div>
+      </MainLayout>
     </BrowserRouter>
   );
 }
 
-export default AppRouter;
+export default App;
