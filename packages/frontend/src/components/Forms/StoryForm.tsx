@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Select from "react-select";
-import CRUD from "../../hooks/CRUD";
+import CRUD from "../../utils/CRUD";
 import { Campaign } from "../../types/campaign.type";
 import { Story } from "../../types/story.type";
 

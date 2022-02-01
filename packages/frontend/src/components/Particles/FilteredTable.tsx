@@ -18,9 +18,9 @@ const FilteredTable: FunctionComponent<IProps> = ({
   pageLength = 10,
   onFilterChange,
 }) => {
-  const [page, setPage] = useState(1);
   const pages = Math.ceil(data.length / pageLength);
 
+  const [page, setPage] = useState(1);
   const [paginatedData, setPaginatedData] = useState([]);
 
   useEffect(() => {

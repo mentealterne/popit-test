@@ -1,8 +1,8 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import FilteredTable from "../components/Particles/FilteredTable";
-import CRUD from "../hooks/CRUD";
-import fetchCampaignsAverages from "../hooks/fetchCampaignsAverages";
-import fetchInfluencersStats from "../hooks/fetchInfluencerStats";
+import CRUD from "../utils/CRUD";
+import fetchCampaignsAverages from "../utils/fetchCampaignsAverages";
+import fetchInfluencersStats from "../utils/fetchInfluencerStats";
 
 const HomePage: FunctionComponent = () => {
   const crud = new CRUD(process.env.REACT_APP_API_URL + "/campaigns/");

@@ -2,9 +2,7 @@ import { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
 import routes from "../../routes/routes-list";
 
-interface IProps {}
-
-const MainNav: FunctionComponent<IProps> = ({ children }) => {
+const MainNav: FunctionComponent = () => {
   return (
     <div>
       <nav>

@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import CampaignForm from "../components/Forms/CampaignForm";
 import FilteredTable from "../components/Particles/FilteredTable";
 import Modal from "../components/Particles/Modal";
-import CRUD from "../hooks/CRUD";
+import CRUD from "../utils/CRUD";
 const Campaigns: FunctionComponent = () => {
   const crud = new CRUD(process.env.REACT_APP_API_URL + "/campaigns/");
 

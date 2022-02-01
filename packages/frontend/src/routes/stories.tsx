@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import StoryForm from "../components/Forms/StoryForm";
 import FilteredTable from "../components/Particles/FilteredTable";
 import Modal from "../components/Particles/Modal";
-import CRUD from "../hooks/CRUD";
+import CRUD from "../utils/CRUD";
 import { Story } from "../types/story.type";
 
 const Stories: FunctionComponent = () => {
