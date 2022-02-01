@@ -13,15 +13,22 @@ export class CampaignsService {
   ) {}
 
   async getAll(): Promise<Campaign[]> {
-    return await this.campaignsRepository.find();
+    return await this.campaignsRepository.find({
+      order: {
+        id: 'ASC',
+      },
+    });
   }
 
   async getById(campaignId: number): Promise<Campaign> {
     return await this.campaignsRepository.findOne(campaignId);
   }
 
-  async create(campaign: CampaignDTO): Promise<void> {
-    await this.campaignsRepository.save(campaign);
+  async create(campaign: CampaignDTO): Promise<Campaign> {
+    return await this.campaignsRepository.save({
+      ...campaign,
+      createdAt: new Date(),
+    });
   }
 
   async edit(campaignId: number, campaign: CampaignDTO) {

@@ -16,6 +16,11 @@ import Story from './story.entity';
 export class StoriesController {
   constructor(private readonly storiesService: StoriesService) {}
 
+  @Get('/')
+  async getStories(): Promise<Story[]> {
+    return await this.storiesService.getAll();
+  }
+
   @Post('/')
   async createStory(@Body() story: StoryDTO): Promise<void> {
     return await this.storiesService.create(story);
@@ -36,8 +41,9 @@ export class StoriesController {
     await this.storiesService.edit(storyId, story);
   }
 
-  @Delete('storyId')
+  @Delete(':storyId')
   async deleteStory(@Param('storyId', ParseIntPipe) storyId: number) {
+    console.log('IM DELETING');
     return await this.storiesService.remove(storyId);
   }
 }

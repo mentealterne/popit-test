@@ -6,7 +6,7 @@ interface IProps {
   data?: any;
   filterOptions?: { label: string; value: string }[];
   onFilterChange?: (value: number) => void;
-  columns: { label: string; key: string }[];
+  columns: { label: string; key: string; onClick?: (value: any) => void }[];
   pageLength?: number;
 }
 
@@ -19,7 +19,7 @@ const FilteredTable: FunctionComponent<IProps> = ({
   onFilterChange,
 }) => {
   const [page, setPage] = useState(1);
-  const pages = data.length / pageLength;
+  const pages = Math.ceil(data.length / pageLength);
 
   const [paginatedData, setPaginatedData] = useState([]);
 
@@ -53,9 +53,19 @@ const FilteredTable: FunctionComponent<IProps> = ({
             return (
               <tr className="py-2">
                 {columns.map((column, index) => (
-                  <td key={index} className="p-2 border-b border-gray-100">
+                  <td
+                    onClick={() =>
+                      column.onClick && column.onClick(row[column.key])
+                    }
+                    key={index}
+                    className={`p-2 border-b border-gray-100 ${
+                      column.onClick
+                        ? "cursor-pointer text-orange-500 hover:text-orange-700"
+                        : ""
+                    }`}
+                  >
                     {" "}
-                    {row[column.key]}
+                    {row[column.key].toString()}
                   </td>
                 ))}
               </tr>

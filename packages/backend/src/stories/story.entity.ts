@@ -27,7 +27,7 @@ class Story {
   @Column({ type: 'date', name: 'postedat' })
   public postedAt: Date;
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.stories)
+  @ManyToOne(() => Campaign, (campaign) => campaign.stories, { eager: true })
   @JoinColumn({ name: 'campaignid' })
   campaign: Campaign;
 }

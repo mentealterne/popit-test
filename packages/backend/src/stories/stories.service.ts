@@ -14,7 +14,11 @@ export class StoriesService {
     private campaignsRepository: Repository<Campaign>,
   ) {}
   async getAll(): Promise<Story[]> {
-    return await this.storiesRepository.find();
+    return await this.storiesRepository.find({
+      order: {
+        id: 'ASC',
+      },
+    });
   }
 
   async getById(storyId: number): Promise<Story> {
@@ -24,18 +28,23 @@ export class StoriesService {
   async create(story: StoryDTO): Promise<void> {
     await this.storiesRepository.save({
       ...story,
+      postedAt: new Date(),
       campaign: await this.campaignsRepository.findOne(story.campaignId),
     });
   }
 
   async edit(storyId: number, story: StoryDTO) {
     return await this.storiesRepository.update(storyId, {
-      ...story,
+      ig_id: story.ig_id,
+      clicks: story.clicks,
+      swipes: story.swipes,
+      views: story.views,
       campaign: await this.campaignsRepository.findOne(story.campaignId),
     });
   }
 
   async remove(storyId: number): Promise<void> {
+    console.log('NUMBER IS', storyId);
     await this.storiesRepository.delete(storyId);
   }
 }

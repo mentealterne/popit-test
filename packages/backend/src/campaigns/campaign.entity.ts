@@ -15,7 +15,7 @@ class Campaign {
   @Column({ type: 'date', name: 'createdat' })
   public createdAt: Date;
 
-  @OneToMany(() => Story, (story) => story.campaign, { eager: true })
+  @OneToMany(() => Story, (story) => story.campaign)
   stories: Story[];
 }
 

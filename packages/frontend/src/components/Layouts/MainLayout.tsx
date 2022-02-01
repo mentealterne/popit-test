@@ -28,10 +28,13 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
     <div className="w-screen h-screen bg-gray-100 p-4 justify-center  flex">
       <div className="flex flex-row gap-4 bg-white rounded-md shadow-md w-full">
         <div className="w-1/6 flex flex-col p-4 justify-between">
-          <h1 className="text-orange-600 text-2xl font-bold uppercase">
-            PopIt
-          </h1>
-          <MainNav />
+          <div className="flex flex-col gap-8">
+            <h1 className="text-orange-600 text-2xl font-bold uppercase">
+              PopIt
+            </h1>
+            <MainNav />
+          </div>
+
           <div className="p-4 rounded-md shadow-md bg-gray-200 flex flex-col justify-center">
             <img
               src={artificialIntelligence}
@@ -48,7 +51,7 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
           </div>
         </div>
         <div className="w-4/6 bg-gray-200 overflow-y-auto p-4">
-          <div className="p-4 rounded-md shadow-md text-orange-700 bg-orange-300 font-bold">
+          <div className="p-4 rounded-md shadow-md text-orange-700 bg-orange-300 font-bold mb-4">
             <FontAwesomeIcon icon={faInfoCircle} className="mr-3" />
             Welcome back again! Nice to see you, how was your day? We are
             upgrading the system to its newest version so you could encounter

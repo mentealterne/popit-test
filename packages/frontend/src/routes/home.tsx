@@ -1,49 +1,27 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import FilteredTable from "../components/FilteredTable";
+import FilteredTable from "../components/Particles/FilteredTable";
+import CRUD from "../hooks/CRUD";
+import fetchCampaignsAverages from "../hooks/fetchCampaignsAverages";
+import fetchInfluencersStats from "../hooks/fetchInfluencerStats";
 
 const HomePage: FunctionComponent = () => {
+  const crud = new CRUD(process.env.REACT_APP_API_URL + "/campaigns/");
+
   const [topInfluencers, setTopInfluencers] = useState([]);
   const [worstInfluencers, setWorstInfluencers] = useState([]);
-  const [campaigns, setCampaigns] = useState([]);
+  const [campaigns, setCampaigns] = useState<any[]>([]);
   const [averages, setAverages] = useState([]);
 
-  const fetchInfluencersStats = async (
-    k: number,
-    type: string,
-    cb: Function,
-    campaignId?: number
-  ) => {
-    const request = await fetch(
-      process.env.REACT_APP_API_URL +
-        `/campaigns/top-k-influencers?k=${k}&type=${type}${
-          campaignId ? "&campaignId=" + campaignId : ""
-        }`
-    );
-
-    const response = await request.json();
-    cb(response);
-  };
-
   const fetchCampaigns = async () => {
-    const request = await fetch(process.env.REACT_APP_API_URL + `/campaigns/`);
-    const response = await request.json();
-    setCampaigns(response);
-  };
-
-  const fetchCampaignsAVG = async () => {
-    const request = await fetch(
-      process.env.REACT_APP_API_URL + `/campaigns/average-views`
-    );
-    const response = await request.json();
-
-    setAverages(response);
+    const campaigns = await crud.readAll();
+    setCampaigns(campaigns);
   };
 
   useEffect(() => {
     fetchInfluencersStats(10, "top", setTopInfluencers);
     fetchInfluencersStats(10, "worst", setWorstInfluencers);
     fetchCampaigns();
-    fetchCampaignsAVG();
+    fetchCampaignsAverages(setAverages);
   }, []);
 
   return (

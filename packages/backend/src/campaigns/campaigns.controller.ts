@@ -26,7 +26,7 @@ export class CampaignsController {
   }
 
   @Post('/')
-  async createCampaign(@Body() campaign: CampaignDTO): Promise<void> {
+  async createCampaign(@Body() campaign: CampaignDTO): Promise<Campaign> {
     return await this.campaignsService.create(campaign);
   }
 
@@ -59,7 +59,7 @@ export class CampaignsController {
     await this.campaignsService.edit(campaignId, campaign);
   }
 
-  @Delete('campaignId')
+  @Delete(':campaignId')
   async deleteCampaign(@Param('campaignId', ParseIntPipe) campaignId: number) {
     return await this.campaignsService.remove(campaignId);
   }

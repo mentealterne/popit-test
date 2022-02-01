@@ -1,7 +1,8 @@
-import { IsString, IsISO8601, IsOptional } from 'class-validator';
+import { IsString, IsISO8601, IsOptional, IsNotEmpty } from 'class-validator';
 
 export default class StoryDTO {
   @IsString()
+  @IsNotEmpty()
   public ig_id: string;
 
   @IsString()
