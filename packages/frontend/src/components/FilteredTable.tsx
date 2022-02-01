@@ -4,15 +4,18 @@ import Dropdown from "./Dropdown";
 interface IProps {
   name: string;
   data?: any;
-  filterOptions?: { label: string; key: string }[];
+  filterOptions?: { label: string; value: string }[];
+  onFilterChange: (value: number) => void;
   columns: { label: string; key: string }[];
   pageLength?: number;
 }
+
 const FilteredTable: FunctionComponent<IProps> = ({
   name,
   data,
   columns,
   filterOptions,
+  onFilterChange,
 }) => {
   return (
     <div className="flex flex-col gap-4 w-full bg-white rounded shadow-md p-4 font-light text-gray-700">
@@ -20,7 +23,7 @@ const FilteredTable: FunctionComponent<IProps> = ({
       {filterOptions && (
         <Dropdown
           options={filterOptions}
-          onChange={(key) => console.log(key)}
+          onChange={(key) => onFilterChange(key.value)}
         />
       )}
       <table>

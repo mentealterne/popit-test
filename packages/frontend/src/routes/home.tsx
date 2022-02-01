@@ -9,11 +9,14 @@ const HomePage: FunctionComponent = () => {
   const fetchInfluencersStats = async (
     k: number,
     type: string,
-    cb: Function
+    cb: Function,
+    campaignId?: number
   ) => {
     const request = await fetch(
       process.env.REACT_APP_API_URL +
-        `/campaigns/top-k-influencers?k=${k}&type=${type}`
+        `/campaigns/top-k-influencers?k=${k}&type=${type}${
+          campaignId ? "&campaignId=" + campaignId : ""
+        }`
     );
 
     const response = await request.json();
@@ -35,11 +38,14 @@ const HomePage: FunctionComponent = () => {
   return (
     <div className=" grid grid-cols-2 gap-4 p-4">
       <FilteredTable
+        onFilterChange={(campaignId) =>
+          fetchInfluencersStats(10, "top", setTopInfluencers, campaignId)
+        }
         name="Top 10 influencers"
         filterOptions={
           campaigns &&
           campaigns.map((campaign: any) => {
-            return { label: campaign.name, key: campaign.id };
+            return { label: campaign.company, value: campaign.id };
           })
         }
         columns={[
@@ -51,10 +57,13 @@ const HomePage: FunctionComponent = () => {
 
       <FilteredTable
         name="Worst 10 influencers"
+        onFilterChange={(campaignId) =>
+          fetchInfluencersStats(10, "worst", setWorstInfluencers, campaignId)
+        }
         filterOptions={
           campaigns &&
           campaigns.map((campaign: any) => {
-            return { label: campaign.name, key: campaign.id };
+            return { label: campaign.company, value: campaign.id };
           })
         }
         columns={[
