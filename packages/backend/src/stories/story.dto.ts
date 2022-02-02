@@ -1,4 +1,10 @@
-import { IsString, IsISO8601, IsOptional, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsISO8601,
+  IsOptional,
+  IsNotEmpty,
+  IsNumber,
+} from 'class-validator';
 
 export default class StoryDTO {
   @IsString()
@@ -20,6 +26,6 @@ export default class StoryDTO {
   @IsISO8601()
   public postedAt: Date;
 
-  @IsString()
+  @IsNumber()
   public campaignId: number;
 }

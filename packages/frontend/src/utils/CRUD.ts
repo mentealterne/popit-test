@@ -6,45 +6,39 @@ export default class CRUD {
   }
 
   async readAll(): Promise<any[]> {
-    const request = await fetch(this.baseUrl);
-    const response = await request.json();
-    return response;
+    return await this.makeRequest(this.baseUrl, "GET");
   }
 
   async readOne(id: number): Promise<any> {
-    const request = await fetch(this.baseUrl + id);
-    const response = await request.json();
-    return response;
+    return await this.makeRequest(this.baseUrl + id, "GET");
   }
 
   async create(payload: any): Promise<any> {
-    const request = await fetch(this.baseUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    const response = await request.json();
-    return response;
+    return await this.makeRequest(this.baseUrl, "POST", true, payload);
   }
 
   async update(id: number, payload: any): Promise<void> {
-    await fetch(this.baseUrl + id, {
-      method: "PATCH",
+    await this.makeRequest(this.baseUrl + id, "PATCH", false, payload);
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.makeRequest(this.baseUrl + id, "DELETE", false);
+  }
+
+  private async makeRequest(
+    url: string,
+    type: "POST" | "GET" | "DELETE" | "PATCH" | "PUT",
+    jsonResponse: boolean = true,
+    payload?: any
+  ): Promise<any> {
+    const request = await fetch(url, {
+      method: type,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
-  }
 
-  async delete(id: number): Promise<void> {
-    await fetch(this.baseUrl + id, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (jsonResponse) return await request.json();
   }
 }

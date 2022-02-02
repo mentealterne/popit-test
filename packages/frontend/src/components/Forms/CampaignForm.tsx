@@ -37,7 +37,7 @@ const CampaignForm: FunctionComponent<IProps> = ({
       <input
         checked={open}
         type="checkbox"
-        onClick={() => setOpen(!open)}
+        onChange={() => setOpen(!open)}
         className="p-2 border border-gray-400 rounded-md"
       />
       <button

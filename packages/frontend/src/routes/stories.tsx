@@ -54,7 +54,9 @@ const Stories: FunctionComponent = () => {
     await storiesCrud.update(id, story);
 
     setEditingModalOpen(false);
-    setStories([...stories.map((c: any) => (c.id === id ? { ...story } : c))]);
+    setStories([
+      ...stories.map((c: any) => (c.id === id ? { id, ...story } : c)),
+    ]);
   };
 
   const deleteCurrentStory = async (id: number) => {
