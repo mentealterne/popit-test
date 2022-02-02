@@ -8,6 +8,7 @@ interface IProps {
 
 const Dropdown: FunctionComponent<IProps> = ({ options, onChange }) => {
   const dropdownOptions = [{ label: "Overall", value: null }, ...options];
+
   return (
     <Select
       options={dropdownOptions}

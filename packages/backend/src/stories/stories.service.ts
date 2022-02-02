@@ -25,8 +25,8 @@ export class StoriesService {
     return await this.storiesRepository.findOne(storyId);
   }
 
-  async create(story: StoryDTO): Promise<void> {
-    await this.storiesRepository.save({
+  async create(story: StoryDTO): Promise<Story> {
+    return await this.storiesRepository.save({
       ...story,
       postedAt: new Date(),
       campaign: await this.campaignsRepository.findOne(story.campaignId),

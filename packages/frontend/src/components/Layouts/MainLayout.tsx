@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import MainNav from "../MainNav";
 import artificialIntelligence from "../../assets/artificial-intelligence.png";
 import parrot from "../../assets/parrot.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -18,12 +17,14 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
     "Campaign updated",
     "Campaign created",
   ];
+
   const mockReminders = [
     "You have a meeting today",
     "You have a meeting today",
     "You have a meeting today",
     "You have a meeting today",
   ];
+
   return (
     <div className="w-screen h-screen bg-gray-100 p-4 justify-center  flex">
       <div className="flex flex-row gap-4 bg-white rounded-md shadow-md w-full">
@@ -42,7 +43,7 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
               className="w-1/3 mx-auto"
             />
             <h2 className="text-center text-lg font-light py-2 text-gray-700">
-              It seems you are a super-admin and can control almost{" "}
+              It seems you are a super-admin and can control almost
               <span className="font-bold text-orange-500">everything.</span>
             </h2>
             <button className="px-4 cursor-pointer hover:bg-orange-800 py-2 text-center text-white bg-orange-500 mx-auto font-bold rounded-md shadow-md">
@@ -69,7 +70,7 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
               <img src={parrot} alt="parrot" className="mx-auto" />
             </figure>
             <p className="text-center text-lg font-light py-2 text-gray-700">
-              Welcome back,{" "}
+              Welcome back,
               <span className="font-bold text-orange-500">Admin</span>
             </p>
             <div className="py-4 mt-8">
@@ -77,8 +78,11 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
                 Latest updates
               </h2>
               <ul>
-                {mockNotifications.map((notification) => (
-                  <li className="px-4 py-2 border-l-2 border-orange-200 rounded-sm mb-1">
+                {mockNotifications.map((notification, index) => (
+                  <li
+                    key={index}
+                    className="px-4 py-2 border-l-2 border-orange-200 rounded-sm mb-1"
+                  >
                     {notification}
                   </li>
                 ))}
@@ -90,8 +94,11 @@ const MainLayout: FunctionComponent<IProps> = ({ children }) => {
                 Reminders
               </h2>
               <ul>
-                {mockReminders.map((reminder) => (
-                  <li className="px-4 py-2 border-l-2 border-orange-200 rounded-sm mb-1">
+                {mockReminders.map((reminder, index) => (
+                  <li
+                    key={index}
+                    className="px-4 py-2 border-l-2 border-orange-200 rounded-sm mb-1"
+                  >
                     {reminder}
                   </li>
                 ))}

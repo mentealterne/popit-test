@@ -11,10 +11,10 @@ const Modal: FunctionComponent<IProps> = ({ children, onCancel }) => {
       <div className="p-10 bg-white rounded-md shadow-md relative">
         <div
           onClick={() => onCancel()}
-          className="absolute font-bold  text-center text-white rounded-full p-1 w-8 h-8 bg-orange-500"
+          className="absolute cursor-pointer hover:bg-orange-700 font-bold  text-center text-white rounded-full p-1 w-8 h-8 bg-orange-500"
           style={{ top: "-5px", right: "-5px" }}
         >
-          x{" "}
+          x
         </div>
         {children}
       </div>

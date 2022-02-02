@@ -39,19 +39,17 @@ const FilteredTable: FunctionComponent<IProps> = ({
       <table>
         <thead>
           <tr>
-            {columns.map((column) => (
+            {columns.map((column, index) => (
               <th className="text-left p-2 text-orange-500" key={column.key}>
-                {" "}
                 {column.label}
               </th>
             ))}
           </tr>
         </thead>
-
         <tbody>
-          {paginatedData.map((row: any) => {
+          {paginatedData.map((row: any, index) => {
             return (
-              <tr className="py-2">
+              <tr className="py-2" key={index}>
                 {columns.map((column, index) => (
                   <td
                     onClick={() =>
@@ -64,7 +62,6 @@ const FilteredTable: FunctionComponent<IProps> = ({
                         : ""
                     }`}
                   >
-                    {" "}
                     {row[column.key].toString()}
                   </td>
                 ))}
@@ -78,6 +75,7 @@ const FilteredTable: FunctionComponent<IProps> = ({
         <ul className="flex flex-row gap-1 w-full justify-center">
           {Array.from({ length: pages }).map((_, index) => (
             <li
+              key={index}
               className="rounded-md shadow-md w-12 bg-orange-300 text-center text-white font-bold p-1 cursor-pointer hover:bg-orange-500"
               onClick={() => setPage(index + 1)}
             >

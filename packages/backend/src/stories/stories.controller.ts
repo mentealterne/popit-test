@@ -22,7 +22,7 @@ export class StoriesController {
   }
 
   @Post('/')
-  async createStory(@Body() story: StoryDTO): Promise<void> {
+  async createStory(@Body() story: StoryDTO): Promise<Story> {
     return await this.storiesService.create(story);
   }
 

@@ -5,6 +5,7 @@ interface IProps {
   onDelete?: (id: number) => void;
   campaign?: { company: string; open: boolean; id: number };
 }
+
 const CampaignForm: FunctionComponent<IProps> = ({
   onSubmit,
   campaign,
@@ -24,22 +25,21 @@ const CampaignForm: FunctionComponent<IProps> = ({
 
   return (
     <form className="flex flex-col gap-4">
+      <label className="block text-gray-700 text-sm font-bold ">Company </label>
       <input
         defaultValue={company}
         type="text"
         onChange={(e) => setCompany(e.target.value)}
-        className="p-2 border border-gray-400 rounded-md"
+        className="p-2 bg-gray-100 rounded-md"
         placeholder="Company"
       />
-      <label className="flex flex-row gap-2 items-center">
-        <input
-          checked={open}
-          type="checkbox"
-          onClick={() => setOpen(!open)}
-          className="p-2 border border-gray-400 rounded-md"
-        />
-        Open
-      </label>
+      <label className="block text-gray-700 text-sm font-bold"> Open </label>
+      <input
+        checked={open}
+        type="checkbox"
+        onClick={() => setOpen(!open)}
+        className="p-2 border border-gray-400 rounded-md"
+      />
       <button
         type="button"
         onClick={() => onSubmit({ company, open })}

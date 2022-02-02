@@ -3,18 +3,9 @@ import CampaignForm from "../components/Forms/CampaignForm";
 import FilteredTable from "../components/Particles/FilteredTable";
 import Modal from "../components/Particles/Modal";
 import CRUD from "../utils/CRUD";
+
 const Campaigns: FunctionComponent = () => {
   const crud = new CRUD(process.env.REACT_APP_API_URL + "/campaigns/");
-
-  const [campaigns, setCampaigns] = useState<
-    { company: string; open: boolean }[]
-  >([]);
-  const [campaign, setSelectedCampaign] =
-    useState<{ company: string; open: boolean; id: number }>();
-
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isEditingModalOpen, setEditingModalOpen] = useState(false);
-
   const columns = [
     {
       label: "ID",
@@ -33,13 +24,21 @@ const Campaigns: FunctionComponent = () => {
     { label: "Open", key: "open" },
   ];
 
+  const [campaigns, setCampaigns] = useState<
+    { company: string; open: boolean }[]
+  >([]);
+  const [campaign, setSelectedCampaign] =
+    useState<{ company: string; open: boolean; id: number }>();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isEditingModalOpen, setEditingModalOpen] = useState(false);
+
   const createNewCampaign = async (campaign: {
     company: string;
     open: boolean;
   }) => {
     const newCampaign = await crud.create(campaign);
     setModalOpen(false);
-
     setCampaigns([newCampaign, ...campaigns]);
   };
 

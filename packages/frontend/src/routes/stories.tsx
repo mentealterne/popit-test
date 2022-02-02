@@ -10,7 +10,6 @@ const Stories: FunctionComponent = () => {
 
   const [stories, setStories] = useState<Story[]>([]);
   const [story, setSelectedStory] = useState<Story>();
-
   const [isModalOpen, setModalOpen] = useState(false);
   const [isEditingModalOpen, setEditingModalOpen] = useState(false);
 
@@ -46,8 +45,8 @@ const Stories: FunctionComponent = () => {
 
   const createNewStory = async (story: Story) => {
     const newStory = await storiesCrud.create(story);
-    setModalOpen(false);
 
+    setModalOpen(false);
     setStories([newStory, ...stories]);
   };
 
@@ -55,19 +54,19 @@ const Stories: FunctionComponent = () => {
     await storiesCrud.update(id, story);
 
     setEditingModalOpen(false);
-    setStories([
-      ...stories.map((c: any) => (c.id === id ? { id, ...story } : c)),
-    ]);
+    setStories([...stories.map((c: any) => (c.id === id ? { ...story } : c))]);
   };
 
   const deleteCurrentStory = async (id: number) => {
     await storiesCrud.delete(id);
+
     setEditingModalOpen(false);
     setStories(stories.filter((c: any) => c.id !== id));
   };
 
   const fetchStories = async () => {
     const stories = await storiesCrud.readAll();
+
     setStories(stories);
   };
 
@@ -81,14 +80,13 @@ const Stories: FunctionComponent = () => {
           <StoryForm onSubmit={(payload) => createNewStory(payload)} />{" "}
         </Modal>
       )}
-
       {isEditingModalOpen && story && (
         <Modal onCancel={() => setEditingModalOpen(false)}>
           <StoryForm
             onSubmit={(payload) => editCurrentStory(story.id!, payload)}
             onDelete={(id) => deleteCurrentStory(id)}
             story={story}
-          />{" "}
+          />
         </Modal>
       )}
       <div>
@@ -99,7 +97,6 @@ const Stories: FunctionComponent = () => {
           New story
         </button>
       </div>
-
       <FilteredTable
         columns={columns}
         data={stories}
